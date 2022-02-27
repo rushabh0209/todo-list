@@ -8,6 +8,8 @@ import Todo from './Todo';
 import { nanoid } from 'nanoid';
 
 import './todo.css';
+import { removeCookies } from '../../utils/cookies';
+import RouterHook from '../../hooks/useRoute';
 
 function usePrevious(value) {
   const ref = useRef();
@@ -26,7 +28,7 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 const Main = (props) => {
-  console.log('propsprops', props.todo.data);
+  const { navigate } = RouterHook();
   const tasks = props?.todo?.data;
   const [filter, setFilter] = useState('All');
 
@@ -40,6 +42,11 @@ const Main = (props) => {
 
   function editTask(id, newName) {
     props.editTodoHandler({ id, newName });
+  }
+
+  function logout() {
+    navigate('/login')
+    removeCookies('isLogin')
   }
 
   const taskList = tasks
@@ -79,6 +86,9 @@ const Main = (props) => {
 
   return (
     <div className="todoapp stack-large">
+      <div className="logout">
+        <button onClick={logout}>Logout</button>
+      </div>
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
       <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>

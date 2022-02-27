@@ -67,6 +67,20 @@ body {
     line-height: 1.31579;
   }
 }
+
+.logout{
+  display:flex;
+  align-items:flex-end;
+  justify-content: end;
+}
+
+.logout>button{
+  background-color:#ca3c3c;
+  font: size 14px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
 /*END RESETS*/
 /* GLOBAL STYLES */
 .form-group > input[type='text'] {

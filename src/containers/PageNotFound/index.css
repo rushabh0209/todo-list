@@ -1,0 +1,22 @@
+.p404 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.p404-text {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.p404-button {
+  font-size: 16px;
+  background: #0d6efd;
+  color: #fff;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 20px;
+}
