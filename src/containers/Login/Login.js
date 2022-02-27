@@ -6,6 +6,7 @@ import './login.css';
 
 function Login() {
   const { navigate } = RouterHook();
+  const [isError, setError] = React.useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -14,15 +15,20 @@ function Login() {
     if (email === 'test@gmail.com' && password === 'test') {
       console.log('success');
       setCookies('isLogin', true);
-      navigate('/')
+      navigate('/');
     } else {
+      setError(true);
       console.log('failed');
     }
   };
   return (
     <div className="login">
       <div className="login-form">
-        <form onSubmit={submitHandler}>
+        <form
+          onSubmit={submitHandler}
+          onChange={() => {
+            setError(false);
+          }}>
           <div className="row login-form-header">
             <div className="col-auto login-form-header-content">Login</div>
           </div>
@@ -42,6 +48,7 @@ function Login() {
               <input type="password" className="form-control" id="inputPassword" required />
             </div>
           </div>
+          {isError && <div className="row mt-3 error-msg">email and password are invalid</div>}
           <div className="row mt-3 login-form-submit">
             <div className="col-auto">
               <button className="btn btn-primary" type="submit">
