@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-function usePrevious(value) {
+const usePrevious = (value) => {
   const ref = useRef();
   useEffect(() => {
     ref.current = value;
   });
   return ref.current;
-}
+};
 
 const Todo = (props) => {
   const [isEditing, setEditing] = useState(false);
@@ -17,11 +17,11 @@ const Todo = (props) => {
 
   const wasEditing = usePrevious(isEditing);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setNewName(e.target.value);
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!newName.trim()) {
       return;
@@ -29,7 +29,7 @@ const Todo = (props) => {
     props.editTask(props.id, newName);
     setNewName('');
     setEditing(false);
-  }
+  };
 
   const editingTemplate = (
     <form className="stack-small" onSubmit={handleSubmit}>

@@ -3,7 +3,7 @@ import RouterHook from '../../hooks/useRoute';
 
 import './index.css';
 
-function PageNotFound() {
+const PageNotFound = () => {
   const { navigate } = RouterHook();
   const goHome = () => {
     navigate('/');
@@ -16,6 +16,6 @@ function PageNotFound() {
       </button>
     </div>
   );
-}
+};
 
 export default PageNotFound;

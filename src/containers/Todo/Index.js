@@ -1,53 +1,44 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setTodo, editTodo, deleteTodo, editTodoStatus } from '../../redux/actions/todo';
 import Form from './Form';
 import FilterButton from './FilterButton';
 import Todo from './Todo';
 import { nanoid } from 'nanoid';
-
-import './todo.css';
 import { removeCookies } from '../../utils/cookies';
 import RouterHook from '../../hooks/useRoute';
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
-const FILTER_MAP = {
-  All: () => true,
-  Active: (task) => !task.completed,
-  Completed: (task) => task.completed
-};
-
-const FILTER_NAMES = Object.keys(FILTER_MAP);
+import { FILTER_MAP, FILTER_NAMES } from '../../utils/utils';
+import './todo.css';
 
 const Main = (props) => {
-  const { navigate } = RouterHook();
   const tasks = props?.todo?.data;
+
+  const { navigate } = RouterHook();
+
   const [filter, setFilter] = useState('All');
 
-  function toggleTaskCompleted(id) {
+  const logout = () => {
+    navigate('/login');
+    removeCookies('isLogin');
+  };
+
+  const addTask = (name) => {
+    const newTask = { id: 'todo-' + nanoid(), name: name, completed: false };
+    props.setTodoHandler(newTask);
+  };
+
+  const toggleTaskCompleted = (id) => {
     props.editTodoStatusHandler(id);
-  }
+  };
 
-  function deleteTask(id) {
-    props.deleteTodoHandler(id);
-  }
-
-  function editTask(id, newName) {
+  const editTask = (id, newName) => {
     props.editTodoHandler({ id, newName });
-  }
+  };
 
-  function logout() {
-    navigate('/login')
-    removeCookies('isLogin')
-  }
+  const deleteTask = (id) => {
+    props.deleteTodoHandler(id);
+  };
 
   const taskList = tasks
     .filter(FILTER_MAP[filter])
@@ -63,26 +54,8 @@ const Main = (props) => {
       />
     ));
 
-  const filterList = FILTER_NAMES.map((name) => (
-    <FilterButton key={name} name={name} isPressed={name === filter} setFilter={setFilter} />
-  ));
-
-  function addTask(name) {
-    const newTask = { id: 'todo-' + nanoid(), name: name, completed: false };
-    props.setTodoHandler(newTask);
-  }
-
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
-
-  const listHeadingRef = useRef(null);
-  const prevTaskLength = usePrevious(tasks.length);
-
-  useEffect(() => {
-    if (tasks.length - prevTaskLength === -1) {
-      listHeadingRef.current.focus();
-    }
-  }, [tasks.length, prevTaskLength]);
 
   return (
     <div className="todoapp stack-large">
@@ -90,8 +63,12 @@ const Main = (props) => {
         <button onClick={logout}>Logout</button>
       </div>
       <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception">{filterList}</div>
-      <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
+      <div className="filters btn-group stack-exception">
+        {FILTER_NAMES.map((name) => (
+          <FilterButton key={name} name={name} isPressed={name === filter} setFilter={setFilter} />
+        ))}
+      </div>
+      <h2 id="list-heading" tabIndex="-1">
         {headingText}
       </h2>
       <ul

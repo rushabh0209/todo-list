@@ -4,7 +4,7 @@ import { setCookies } from '../../utils/cookies';
 
 import './login.css';
 
-function Login() {
+const Login = () => {
   const { navigate } = RouterHook();
   const [isError, setError] = React.useState(false);
 
@@ -60,6 +60,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

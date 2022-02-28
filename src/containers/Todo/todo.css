@@ -1,88 +1,24 @@
-/* RESETS */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-*:focus {
-  outline: 3px dashed #228bec;
-  outline-offset: 0;
-}
-html {
-  font: 62.5% / 1.15 sans-serif;
-}
-h1,
-h2 {
-  margin-bottom: 0;
-}
 ul {
   list-style: none;
   padding: 0;
 }
-button {
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-}
-button::-moz-focus-inner {
-  border: 0;
-}
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-button,
-input {
-  overflow: visible;
-}
-input[type='text'] {
-  border-radius: 0;
+
+.logout {
+  display: flex;
+  justify-content: flex-end;
 }
 
-@media screen and (min-width: 620px) {
-  body {
-    font-size: 1.9rem;
-    line-height: 1.31579;
-  }
-}
-
-.logout{
-  display:flex;
-  align-items:flex-end;
-  justify-content: end;
-}
-
-.logout>button{
-  background-color:#ca3c3c;
+.logout > button {
+  background-color: #ca3c3c;
   font: size 14px;
   color: #fff;
   padding: 10px 20px;
   border-radius: 4px;
 }
-/*END RESETS*/
-/* GLOBAL STYLES */
-.form-group > input[type='text'] {
-  display: inline-block;
-  margin-top: 0.4rem;
-}
+
 .btn {
   padding: 0.8rem 1rem 0.7rem;
-  border: 0.2rem solid #4d4d4d;
+  border: 2px solid #4d4d4d;
   cursor: pointer;
   text-transform: capitalize;
 }
@@ -140,14 +76,7 @@ input[type='text'] {
 .stack-large > * + * {
   margin-top: 2.5rem;
 }
-@media screen and (min-width: 550px) {
-  .stack-small > * + * {
-    margin-top: 1.4rem;
-  }
-  .stack-large > * + * {
-    margin-top: 2.8rem;
-  }
-}
+
 .stack-exception {
   margin-top: 1.2rem;
 }
@@ -155,20 +84,11 @@ input[type='text'] {
 .todoapp {
   background: #fff;
   margin: 10px 400px;
-  padding: 1rem;
+  padding: 20px 30px;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2.5rem 5rem 0 rgba(0, 0, 0, 0.1);
 }
-@media screen and (min-width: 550px) {
-  .todoapp {
-    padding: 4rem;
-  }
-}
-.todoapp > * {
-  max-width: 50rem;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 .todoapp > form {
   max-width: 100%;
 }
@@ -188,7 +108,7 @@ input[type='text'] {
 }
 .input__lg {
   padding: 2rem;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
 }
 .input__lg:focus {
   border-color: #4d4d4d;
